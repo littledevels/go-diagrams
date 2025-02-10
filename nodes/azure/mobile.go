@@ -1,6 +1,6 @@
 package azure
 
-import "github.com/blushft/go-diagrams/diagram"
+import "github.com/kmakedos/go-diagrams/diagram"
 
 type mobileContainer struct {
 	path string
