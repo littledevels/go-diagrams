@@ -1,6 +1,6 @@
 package gcp
 
-import "github.com/kmakedos/go-diagrams/diagram"
+import "github.com/littledevels/go-diagrams/diagram"
 
 type iotContainer struct {
 	path string

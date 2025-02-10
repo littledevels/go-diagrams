@@ -1,7 +1,7 @@
 package diagrams
 
 import (
-	"github.com/kmakedos/go-diagrams/diagram"
+	"github.com/littledevels/go-diagrams/diagram"
 )
 
 func New(opts ...diagram.Option) (*diagram.Diagram, error) {

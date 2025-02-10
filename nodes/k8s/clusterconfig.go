@@ -1,6 +1,6 @@
 package k8s
 
-import "github.com/kmakedos/go-diagrams/diagram"
+import "github.com/littledevels/go-diagrams/diagram"
 
 type clusterconfigContainer struct {
 	path string

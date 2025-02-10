@@ -1,6 +1,6 @@
 package apps
 
-import "github.com/kmakedos/go-diagrams/diagram"
+import "github.com/littledevels/go-diagrams/diagram"
 
 type analyticsContainer struct {
 	path string

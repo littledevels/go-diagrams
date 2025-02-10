@@ -1,6 +1,6 @@
 package k8s
 
-import "github.com/kmakedos/go-diagrams/diagram"
+import "github.com/littledevels/go-diagrams/diagram"
 
 type storageContainer struct {
 	path string
