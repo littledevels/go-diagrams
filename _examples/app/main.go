@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-	d, err := diagram.New(diagram.Filename("app"), diagram.Label("App"), diagram.Direction("LR"))
+	d, err := diagram.New(diagram.FilePath("kube-example"), diagram.Filename("app"), diagram.Label("App"), diagram.Direction("LR"))
 	if err != nil {
 		log.Fatal(err)
 	}
