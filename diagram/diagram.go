@@ -2,6 +2,7 @@ package diagram
 
 import (
 	"errors"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -87,6 +88,13 @@ func (d *Diagram) Render() error {
 
 func (d *Diagram) render() error {
 	outdir := d.options.FilePath
+	if _, err := os.Stat(outdir); err == nil {
+		log.Printf("%s exists", outdir)
+		err = os.RemoveAll(outdir)
+		if err != nil {
+			log.Fatal("Could not remove old diagram path")
+		}
+	}
 	if err := os.Mkdir(outdir, os.ModePerm); err != nil {
 		return err
 	}
@@ -124,12 +132,6 @@ func (d *Diagram) renderOutput() error {
 }
 
 func (d *Diagram) saveDot() error {
-	if _, err := os.Lstat(d.options.FilePath); os.IsExist(err) {
-		err = os.RemoveAll(d.options.FilePath)
-		if err != nil {
-			return err
-		}
-	}
 	fname := filepath.Join(d.options.FilePath, d.options.FileName+".dot")
 	return os.WriteFile(fname, []byte(d.g.String()), os.ModePerm)
 }
