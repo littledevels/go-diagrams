@@ -88,15 +88,8 @@ func (d *Diagram) Render() error {
 
 func (d *Diagram) render() error {
 	outdir := d.options.FilePath
-	if _, err := os.Stat(outdir); err == nil {
-		log.Printf("%s exists, trying to delete it", outdir)
-		outerr := os.RemoveAll(outdir)
-		if outerr != nil {
-			log.Printf("Error deleting %s: %s", outdir, outerr)
-		}
-	}
 	if err := os.Mkdir(outdir, os.ModePerm); err != nil {
-		return err
+		log.Printf("Could not create diagram directory %s: %s", outdir, err)
 	}
 
 	for _, n := range d.root.nodes {
@@ -133,5 +126,11 @@ func (d *Diagram) renderOutput() error {
 
 func (d *Diagram) saveDot() error {
 	fname := filepath.Join(d.options.FilePath, d.options.FileName+".dot")
+	if _, err := os.Lstat(fname); err == nil {
+		err = os.RemoveAll(fname)
+		if err != nil {
+			log.Printf("Could not remove old dot: %s", err)
+		}
+	}
 	return os.WriteFile(fname, []byte(d.g.String()), os.ModePerm)
 }
