@@ -124,12 +124,12 @@ func (d *Diagram) renderOutput() error {
 }
 
 func (d *Diagram) saveDot() error {
-	fname := filepath.Join(d.options.FilePath, d.options.FileName+".dot")
 	if _, err := os.Lstat(d.options.FilePath); os.IsExist(err) {
 		err = os.RemoveAll(d.options.FilePath)
 		if err != nil {
 			return err
 		}
 	}
+	fname := filepath.Join(d.options.FilePath, d.options.FileName+".dot")
 	return os.WriteFile(fname, []byte(d.g.String()), os.ModePerm)
 }
