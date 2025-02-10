@@ -89,10 +89,10 @@ func (d *Diagram) Render() error {
 func (d *Diagram) render() error {
 	outdir := d.options.FilePath
 	if _, err := os.Stat(outdir); err == nil {
-		log.Printf("%s exists", outdir)
-		err = os.RemoveAll(outdir)
-		if err != nil {
-			log.Fatal("Could not remove old diagram path")
+		log.Printf("%s exists, trying to delete it", outdir)
+		outerr := os.RemoveAll(outdir)
+		if outerr != nil {
+			log.Printf("Error deleting %s: %s", outdir, outerr)
 		}
 	}
 	if err := os.Mkdir(outdir, os.ModePerm); err != nil {
