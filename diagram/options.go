@@ -18,6 +18,7 @@ type Options struct {
 	RankSep    float64
 	Font       Font
 	Attributes map[string]string
+	Rank       string
 }
 
 func (o Options) attrs() map[string]string {
@@ -31,6 +32,7 @@ func (o Options) attrs() map[string]string {
 		"fontname":  o.Font.Name,
 		"fontsize":  strconv.FormatInt(int64(o.Font.Size), 10),
 		"fontcolor": o.Font.Color,
+		"rank":      o.Rank,
 	}
 
 	for k, v := range o.Attributes {
@@ -57,6 +59,7 @@ func DefaultOptions(opts ...Option) Options {
 		RankSep:    0.75,
 		Font:       defaultFont(),
 		Attributes: make(map[string]string),
+		Rank:       "same",
 	}
 
 	for _, o := range opts {
