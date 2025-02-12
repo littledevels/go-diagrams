@@ -83,6 +83,7 @@ func (n *Node) attrs() map[string]string {
 		"fontsize":   strconv.FormatInt(int64(n.Options.Font.Size), 10),
 		"fontname":   n.Options.Font.Name,
 		"fontcolor":  n.Options.Font.Color,
+		"rank":       "same",
 	}
 
 	for k, v := range n.Options.Attributes {
