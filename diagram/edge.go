@@ -126,3 +126,17 @@ func Bidirectional() EdgeOption {
 		o.Reverse = true
 	}
 }
+
+func WithEdgeAttribute(name, value string) EdgeOption {
+	return func(o *EdgeOptions) {
+		o.Attributes[name] = value
+	}
+}
+
+func WithEdgeAttributes(attrs map[string]string) EdgeOption {
+	return func(o *EdgeOptions) {
+		for k, v := range attrs {
+			o.Attributes[k] = v
+		}
+	}
+}

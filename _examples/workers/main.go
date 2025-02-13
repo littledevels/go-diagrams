@@ -12,9 +12,10 @@ func main() {
 	workerCount := 5
 
 	d, err := diagram.New(
-		diagram.Label("Workers"),
+		diagram.Label("Stack"),
 		diagram.Filename("workers"),
 		diagram.Direction("TB"),
+		diagram.WithAttribute("compound", "true"),
 	)
 
 	if err != nil {
@@ -34,11 +35,18 @@ func main() {
 		workers[i] = gcp.Compute.ComputeEngine(diagram.NodeLabel(label))
 	}
 
-	d.Group(diagram.NewGroup("workers").
-		Add(workers...).
-		ConnectAllTo(db.ID()).
-		ConnectAllFrom(lb.ID()),
-	)
+	backends := make([]*diagram.Node, workerCount)
+	for i := 0; i < workerCount; i++ {
+		label := fmt.Sprintf("backend %d", i+1)
+		backends[i] = gcp.Compute.ComputeEngine(diagram.NodeLabel(label))
+	}
+
+	group := diagram.NewGroup("workers")
+	group.Label("Workers")
+	group.Add(workers...)
+	group.ConnectAllTo(db.ID(), diagram.WithEdgeAttribute("ltail", group.ID()))
+	group.ConnectAllFrom(lb.ID(), diagram.WithEdgeAttribute("lhead", group.ID()))
+	d.Group(group)
 
 	if err := d.Render(); err != nil {
 		log.Fatal(err)

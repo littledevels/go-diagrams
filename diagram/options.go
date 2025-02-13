@@ -20,6 +20,9 @@ type Options struct {
 	Attributes map[string]string
 	Rank       string
 	Layout     string
+	Compound   bool
+	LHead      string
+	LTail      string
 }
 
 func (o Options) attrs() map[string]string {
@@ -35,6 +38,7 @@ func (o Options) attrs() map[string]string {
 		"fontcolor": o.Font.Color,
 		"rank":      o.Rank,
 		"layout":    o.Layout,
+		"compound":  strconv.FormatBool(o.Compound),
 	}
 
 	for k, v := range o.Attributes {
