@@ -95,6 +95,11 @@ func Direction(d string) Option {
 	}
 }
 
+func Layout(l string) Option {
+	return func(o *Options) {
+		o.Layout = l
+	}
+}
 func WithAttribute(name, value string) Option {
 	return func(o *Options) {
 		o.Attributes[name] = value
