@@ -19,7 +19,6 @@ type Group struct {
 
 func NewGroup(name string, opts ...GroupOption) *Group {
 	return newGroup("cluster_"+name, 0, nil, opts...)
-
 }
 
 func newGroup(name string, idx int, parent *Group, opts ...GroupOption) *Group {
@@ -115,6 +114,7 @@ func (g *Group) attrs() map[string]string {
 		"fontname":  g.options.Font.Name,
 		"fontsize":  strconv.FormatInt(int64(g.options.Font.Size), 10),
 		"fontcolor": g.options.Font.Color,
+		"rank":      "same",
 	}
 
 	for k, v := range g.options.Attributes {

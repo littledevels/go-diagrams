@@ -19,6 +19,7 @@ type Options struct {
 	Font       Font
 	Attributes map[string]string
 	Rank       string
+	Layout     string
 }
 
 func (o Options) attrs() map[string]string {
@@ -33,6 +34,7 @@ func (o Options) attrs() map[string]string {
 		"fontsize":  strconv.FormatInt(int64(o.Font.Size), 10),
 		"fontcolor": o.Font.Color,
 		"rank":      o.Rank,
+		"layout":    o.Layout,
 	}
 
 	for k, v := range o.Attributes {
@@ -60,6 +62,7 @@ func DefaultOptions(opts ...Option) Options {
 		Font:       defaultFont(),
 		Attributes: make(map[string]string),
 		Rank:       "same",
+		Layout:     "dot",
 	}
 
 	for _, o := range opts {
