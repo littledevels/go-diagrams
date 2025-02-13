@@ -238,3 +238,17 @@ func GroupLabel(l string) GroupOption {
 		o.Label = l
 	}
 }
+
+func WithGroupAttribute(name, value string) GroupOption {
+	return func(o *GroupOptions) {
+		o.Attributes[name] = value
+	}
+}
+
+func WithGroupAttributes(attrs map[string]string) GroupOption {
+	return func(o *GroupOptions) {
+		for k, v := range attrs {
+			o.Attributes[k] = v
+		}
+	}
+}
