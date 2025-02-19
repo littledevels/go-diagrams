@@ -232,3 +232,17 @@ func SetFontOptions(f Font) NodeOption {
 		o.Font = f
 	}
 }
+
+func WithNodeAttribute(name, value string) NodeOption {
+	return func(o *NodeOptions) {
+		o.Attributes[name] = value
+	}
+}
+
+func WithNodeAttributes(attrs map[string]string) NodeOption {
+	return func(o *NodeOptions) {
+		for k, v := range attrs {
+			o.Attributes[k] = v
+		}
+	}
+}
